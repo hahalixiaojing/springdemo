@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repositories xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.39541240.com/repository">
+	<repository implementation="com.demo.infrastructure.repository.user.UserRepositoryImpl"
+		interface="com.demo.domainmodel.user.UserRepository" />
+	<repository implementation="com.demo.infrastructure.repository.product.ProductRepositoryImpl" 
+		interface="com.demo.domainmodel.product.ProductRepository"
+	/>
+</repositories>

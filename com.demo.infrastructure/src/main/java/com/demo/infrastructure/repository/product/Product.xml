@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Product">
+	<resultMap type="Product" id="Product">
+		<constructor>
+			<arg column="RestaurantId" javaType="java.lang.Integer" />
+		</constructor>
+		<result column="Id" property="id" />
+		<result column="RestaurantId" property="restaurantId" />
+		<result column="FoodCategoryId" property="categoryId" />
+		<result column="FoodName" property="name" />
+		<result column="FoodPrice" property="price" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+		<result column="CreateTime" property="createDate" />
+		<result column="FoodCoverPicUrl" property="foodConverPicUrl" />
+		<result column="Sort" property="sort" />
+		<result column="SaleStatus" property="saleStatus" />
+		<result column="FoodStaus" property="foodStatus" />
+		<result column="Unit" property="unit" />
+	</resultMap>
+	<sql id="BaseSelect">
+		select * from food
+	</sql>
+	<select id="findById" parameterType="java.lang.Integer"
+		resultMap="Product">
+		<include refid="BaseSelect" />
+		WHERE Id=#{id};
+	</select>
+	<insert id="Add" parameterType="Product">
+		<selectKey keyColumn="Id" keyProperty="id" order="AFTER"
+			resultType="java.lang.Integer"> select last_insert_id();</selectKey>
+
+		INSERT INTO food
+		(RestaurantId, FoodCategoryId, FoodName,
+		FoodCoverPicUrl, FoodPrice, FoodStaus,
+		CreateTime, Sort, SaleStatus, Unit)
+		VALUES (#{restaurantId}, #{categoryId},
+		#{name}, #{foodConverPicUrl},
+		#{price}, #{foodStatus}, #{createDate}, #{sort}, #{saleStatus}, #{unit});
+	</insert>
+</mapper>  
